@@ -144,7 +144,7 @@ public class SkiaManager {
         GL13.glActiveTexture(s.activeTex);
     }
 
-    /** HUD
+    /** HUD */
     public void render(DrawContext context) {
         renderFrame(canvas -> EventManager.call(new RenderSkiaEvent(context, canvas)), true);
     }

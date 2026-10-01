@@ -411,6 +411,33 @@ public class ItemUtil {
         return itemStack.getItem() instanceof MiningToolItem;
     }
 
+    /**
+     * AutoWeapon-style weapon identification, ported from LiquidBounce's
+     * ModuleAutoWeapon {@code WeaponType} predicates:
+     * a weapon is a sword, an axe (shield breaker), a mace (smash attacker),
+     * a trident/spear, or any item enchanted with Knockback or Fire Aspect
+     * (e.g. a classic knockback stick).
+     */
+    public static boolean isWeapon(ItemStack itemStack) {
+        if (itemStack == null || itemStack.isEmpty()) {
+            return false;
+        }
+
+        return itemStack.getItem() instanceof SwordItem
+                || itemStack.getItem() instanceof AxeItem
+                || itemStack.getItem() instanceof MaceItem
+                || itemStack.getItem() instanceof TridentItem
+                || ItemUtil.getEnchantLevel(itemStack, Enchantments.KNOCKBACK) > 0
+                || ItemUtil.getEnchantLevel(itemStack, Enchantments.FIRE_ASPECT) > 0;
+    }
+
+    /**
+     * Whether the player is currently holding a weapon (AutoWeapon logic).
+     */
+    public static boolean isHoldingWeapon() {
+        return ItemUtil.isWeapon(ItemUtil.mc.player.getMainHandStack());
+    }
+
     public static boolean isEating() {
         ItemStack itemStack = ItemUtil.mc.player.getMainHandStack();
         if (itemStack == null || itemStack.isEmpty()) {

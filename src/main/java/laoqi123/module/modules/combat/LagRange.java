@@ -104,7 +104,7 @@ public class LagRange extends Module {
                             && (!mc.player.isUsingItem() || mc.player.isBlocking())
                             && (
                             !this.weaponsOnly.getValue()
-                                    || ItemUtil.hasRawUnbreakingEnchant()
+                                    || ItemUtil.isHoldingWeapon()
                                     || this.allowTools.getValue() && ItemUtil.isHoldingTool()
                     )) {
                         List<PlayerEntity> players = mc.world.getPlayers().stream()
